@@ -2,11 +2,11 @@
 
 // Your mission, should you choose to accept it, is to write a console.log after each line of code saying what you expect that variable to be at that point in time, and then logging the variable itself. I'll demonstrate with the first one below:
 
-console.log('I expect myFirstVariable to be undefined',myFirstVariable);
+console.log('I expect myFirstVariable to be undefined:',myFirstVariable);
 var myFirstVariable;
-console.log('I still expect myFirstVariable to be undefined',myFirstVariable);
+console.log('I still expect myFirstVariable to be undefined:',myFirstVariable);
 myFirstVariable = 8;
-console.log('I expect myFirstVariable to be 8',myFirstVariable);
+console.log('I expect myFirstVariable to be 8:',myFirstVariable);
 
 
 // Note that there are explanations at the bottom of this document for many of these answers. Definitely try to reason through this with a partner before looking through the explanations though!
@@ -14,12 +14,14 @@ console.log('I expect myFirstVariable to be 8',myFirstVariable);
 // Alrigt, now it's your turn!
 // I'll get you started with another obvious example, then I'll start leaving you more on your own:
 // 1. What is the value of mySecondVar before we declare it? Can you explain why to your partner?
-var mySecondVar;
-
+var mySeondVar;
+console.log('mySeondVar should be undefined:',mySecondVar)
 mySecondVar = 1;
 // 2. What is the value of mySecondVar now?
-mySecondVar = 2;
+console.log('mySecondVar is now 1:',mySecondVar);
+mySeondVar = 2;
 // 3. And what is it now?
+console.log('mySecondVar should now be 2:',mySecondVar);
 
 
 // 1. What is the value of myThirdVar?
