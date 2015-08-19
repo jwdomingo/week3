@@ -14,19 +14,19 @@ console.log('I expect myFirstVariable to be 8:',myFirstVariable);
 // Alrigt, now it's your turn!
 // I'll get you started with another obvious example, then I'll start leaving you more on your own:
 // 1. What is the value of mySecondVar before we declare it? Can you explain why to your partner?
-var mySeondVar;
+var mySecondVar;
 console.log('mySeondVar should be undefined:',mySecondVar)
 mySecondVar = 1;
 // 2. What is the value of mySecondVar now?
 console.log('mySecondVar is now 1:',mySecondVar);
-mySeondVar = 2;
+mySecondVar = 2;
 // 3. And what is it now?
 console.log('mySecondVar should now be 2:',mySecondVar);
 
 
 // 1. What is the value of myThirdVar?
   // Uncomment the following line, and fill in what you expect myThirdVar to be.
-  // console.log('I expect myThirdVar to be YOUR ANSWER HERE:',myThirdVar);
+  //console.log('I expect myThirdVar to throw an uncaught reference error:',myThirdVar);
 
 // Ok, now you should be pretty comfortable with the main takeaway from hoisting: don't try to use variables before you define them for the first time, because they'll just be undefined, not anything useful!
 
@@ -37,10 +37,14 @@ myBike.color = 'pink';
 
 var bikeCopy = myBike;
 // What would we expect bikeCopy.color to be?
+console.log('bikeCopy.color should be pink:',bikeCopy.color);
 
 bikeCopy.brand = 'Public';
 // What would we expect bikeCopy.brand to be?
+console.log('bikeCopy.brand  will be Public:',bikeCopy.brand);
+
 // What would we expect myBike.brand to be? Can you explain why to your pair?
+console.log('myBike.brand will also be Public because bikeCopy and myBike are pointing to the same space in memory:',myBike.brand);
 
 var sparklyBikeMechanic = function(inputBike) {
   inputBike.sparklerCount = 2;
@@ -48,7 +52,11 @@ var sparklyBikeMechanic = function(inputBike) {
 
 sparklyBikeMechanic(bikeCopy);
 // What do we expect bikeCopy.sparklerCount to be?
+console.log('bikeCopy.sparklerCount should be 2:',bikeCopy.sparklerCount);
+
 // What do we expect myBike.sparklerCount to be? Again, take a minute here to explain why to your pair. My explanation would go something like this:
+console.log('myBike.sparklerCount should also be 2:',myBike.sparklerCount);
+
   // Objects are passed by reference. That is, when you store them into a variable, what you're actually storing is just a reference to where that object sits in memory. So when we set bikeCopy = myBike, what we're actually doing is setting bikeCopy equal to the REFERENCE that myBike holds that points to where the object sits in memory.
   // This just like they're both links pointing to the same webpage.
   // So then we create a variable called sparklyBikeMechanic, which is a function that has a single parameter. All this function does is set a property on that object the user passed in to us.
@@ -68,11 +76,15 @@ var racingBikeMechanic = function(inputBike) {
 };
 var returnedBike = racingBikeMechanic(bikeCopy);
 // What do we expect bikeCopy.carbonFiber to be?
+console.log('bikeCopy.carbonFiber will be everything:',bikeCopy.carbonFiber);
 // What do we expect myBike.carbonFiber to be? Explain it again to your partner to get practice explaining it.
+console.log('myBike.carbonFiber will also be everything because bikeCopy and myBike are pointing to the same location in memory and racingBikeMechanic references that same location when assigning the carbonFiber property to inputBike:',myBike.carbonFiber);
 // Now what do we expect returnedBike to be? Talk it out with your partner. Talk through how inputBike inside the function is nothing more than a reference, and we can return that same reference.
+console.log("returnedBike will be the object to which myBike and bikeCopy are pointing { brand: 'Public', color: 'Pink', sparklerCount: 2, carbonFiber 'everything' } :",returnedBike);
 
 returnedBike.color = 'black';
 // What do we expect bikeCopy.color to be now?
+console.log('bikeCopy.color should now be black because racingBikeMechanic returned the object reference from inputBike and this reference was passed to returnedBike; this reference is the same one myBike and bikeCopy are pointed to:',bikeCopy.color);
 
 // Let's think through return statements again for a moment longer.
 var forgetfulMechanic = function(inputBike) {
@@ -81,22 +93,29 @@ var forgetfulMechanic = function(inputBike) {
 
 var noBikeHere = forgetfulMechanic(bikeCopy);
 // What do we expect myBike.condition to be?
+console.log('myBike.condition will be flawless:',myBike.condition);
 // What do we expect noBikeHere to be?
+console.log('Since the function does not have a return statement, noBikeHere should be undefined:',noBikeHere);
+
   // Talk through this with your partner for a few mintues, then read through what my description would be below:
-  // A bike mechanic is an apt analogy here. This particular bike mechanic does a bunch of work modifying the bike and making it flawless (ok, they're actually just really good at that part of their job and can do it by simply modifying a property on the inputBike).
-  // But then when the customer comes to pick up her bike, the mechanic forgets to give it back! So the bike itself is fixed. But it's sitting in the back storage room. Unless the customer has some other way of accessing the bike, the mechanic not returning it is going to be a bit of an issue!
+  // A bike mechanic is an apt analogy here. This particular bike mechanic does a bunch of work modifying the bike and making it flawless
+  // (ok, they're actually just really good at that part of their job and can do it by simply modifying a property on the inputBike).
+  // But then when the customer comes to pick up her bike, the mechanic forgets to give it back! So the bike itself is fixed.
+  // But it's sitting in the back storage room. Unless the customer has some other way of accessing the bike, the mechanic not returning it is going to be a bit of an issue!
   // What does that mean in our example?
     // We're declaring a function called forgetfulMechanic, that takes in a single object as it's parameter, and sets a property on that object. It does nothing else.
     // Then we invoke forgetfulMechanic, passin gin bikeCopy as the argument. We set noBikeHere equal to the results of what forgetfulMechanic returns to us.
     // forgetfulMechanic goes through and sets the condition property on inputBike equal to the string flawless.
-    // Since objects are passed by reference, inputBike is nothing more than a link to where that object sits in memory. So we go and look up the object at that position in memory, and set a property on that object in memory.
+    // Since objects are passed by reference, inputBike is nothing more than a link to where that object sits in memory.
+    // So we go and look up the object at that position in memory, and set a property on that object in memory.
     // This means that any other variable that points to this same position in memory will be able to see this updated property.
       // This is called a side effect: modifying something that is accessible outside of our function.
     // In this case, we are not returning anything. So JavaScript will return undefined for us by default.
     // Remember that JS is super modular. It evaluates each expression, and then passes the results of that expression on to the next thing.
     // In this case, it will evaluate forgetfulMechanic(bikeCoyp);
     // Whatever that evaluates to is what noBikeHere will be set equal to.
-    // You can think of noBikeHere as waiting to "catch" whatever forgetfulMechanic returns. If there's no variable there to catch the results, the function will return something, and the rest of the program will totally ignore it/ drop it on the floor.
+    // You can think of noBikeHere as waiting to "catch" whatever forgetfulMechanic returns. If there's no variable there to catch the results,
+    // the function will return something, and the rest of the program will totally ignore it/ drop it on the floor.
     // In this case, what it's "catching" is undefined, since forgetfulMechanic doesn't return anything.
 
 var confusedMechanic = function(inputBike) {
@@ -105,7 +124,9 @@ var confusedMechanic = function(inputBike) {
 
 var notABike = confusedMechanic(bikeCopy);
 // What do we expect myBike.condition to be now?
+console.log('');
 // What do we expect notABike to be?
+console.log('');
   // Test this out!
   // Now talk it through with your pair.
   // Really.
@@ -126,7 +147,10 @@ var awesomeMechanic = function(inputBike) {
 
 var shiningBike = awesomeMechanic(bikeCopy);
 // What do we expect bikeCopy.condition to be?
+console.log('');
 // What do we expect shiningBike to be? Can you explain why to your pair?
+console.log('');
+
   // Why is this different than confusedMechanic?
   // Let's talk through it!
   // First, inside awesomeMechanic, we are overwriting a property on our inputBike.
@@ -139,11 +163,15 @@ var shiningBike = awesomeMechanic(bikeCopy);
 var numVar = 8;
 var num2 = numVar;
 // What do we expect numVar to be?
+console.log('');
 // What do we expect num2 to be?
+console.log('');
 
 num2 = num2 + 10;
 // What do we expect num2 to be?
+console.log('');
 // What do we expect numVar to be? Can you explain why to your pair?
+console.log('');
   // Remember, only objects and arrays are passed by reference. If this isn't super clear, check out this example:
 
 var myHeightInInches = 81;
@@ -151,6 +179,7 @@ var nineSquared = 81;
 // Now, say I move to Mars where there's less gravity, and so I get taller by an inch.
 myHeightInInches = 82;
 // Do we expect this to have any impact on our nineSquared variable?
+console.log('');
   // Of course not! The result of nineSquared should be totally independent of my height. And indeed, when we're passing around numbers, that's exactly the case. Numbers (and strings and booleans) are passed by value, not by reference. Only arrays and objects are passed by reference.
 
 // Congrats, you've now finished a slew of exercises on how arrays and objects are passed by reference!

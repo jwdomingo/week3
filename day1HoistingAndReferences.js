@@ -85,7 +85,7 @@ var noBikeHere = forgetfulMechanic(bikeCopy);
   // But then when the customer comes to pick up her bike, the mechanic forgets to give it back! So the bike itself is fixed. But it's sitting in the back storage room. Unless the customer has some other way of accessing the bike, the mechanic not returning it is going to be a bit of an issue!
   // What does that mean in our example?
     // We're declaring a function called forgetfulMechanic, that takes in a single object as it's parameter, and sets a property on that object. It does nothing else.
-    // Then we invoke forgetfulMechanic, passin gin bikeCopy as the argument. We set noBikeHere equal to the results of what forgetfulMechanic returns to us.
+    // Then we invoke forgetfulMechanic, passing in bikeCopy as the argument. We set noBikeHere equal to the results of what forgetfulMechanic returns to us.
     // forgetfulMechanic goes through and sets the condition property on inputBike equal to the string flawless.
     // Since objects are passed by reference, inputBike is nothing more than a link to where that object sits in memory. So we go and look up the object at that position in memory, and set a property on that object in memory.
     // This means that any other variable that points to this same position in memory will be able to see this updated property.
